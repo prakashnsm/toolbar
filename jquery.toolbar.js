@@ -51,20 +51,6 @@ if ( typeof Object.create !== 'function' ) {
 
         setTrigger: function() {
             var self = this;
-
-            self.$elem.on('click', function(event) {
-            	if(self.options.isPreventDefEvent){
-            		event.preventDefault();
-            	}
-            	
-            	if(self.options.closeEvent=='click'){
-	                if(self.$elem.hasClass('pressed')) {
-	                    self.hide();
-	                } else {
-	                    self.show();
-	                }
-            	}
-            });
             
             self.$elem.on(self.options.closeEvent, function(event) {
             	if(self.options.isPreventDefEvent){
