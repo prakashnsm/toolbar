@@ -53,7 +53,24 @@ if ( typeof Object.create !== 'function' ) {
             var self = this;
 
             self.$elem.on('click', function(event) {
-                event.preventDefault();
+            	if(self.options.isPreventDefEvent){
+            		event.preventDefault();
+            	}
+            	
+            	if(self.options.closeEvent=='click'){
+	                if(self.$elem.hasClass('pressed')) {
+	                    self.hide();
+	                } else {
+	                    self.show();
+	                }
+            	}
+            });
+            
+            self.$elem.on(self.options.closeEvent, function(event) {
+            	if(self.options.isPreventDefEvent){
+            		event.preventDefault();
+            	}
+
                 if(self.$elem.hasClass('pressed')) {
                     self.hide();
                 } else {
@@ -89,7 +106,9 @@ if ( typeof Object.create !== 'function' ) {
             var content = $(self.options.content).clone( true ).find('a').addClass('tool-item gradient');
             location.html(content);
             location.find('.tool-item').on('click', function(event) {
-                event.preventDefault();
+            	if(self.options.isPreventDefEvent){
+            		event.preventDefault();
+            	}
                 self.$elem.trigger('toolbarItemClick', this);
             });
         },
@@ -235,7 +254,9 @@ if ( typeof Object.create !== 'function' ) {
     $.fn.toolbar.options = {
         content: '#myContent',
         position: 'top',
+        isPreventDefEvent: true,
         hideOnClick: false,
+        closeEvent : 'click', 
         zIndex: 120
     };
 
